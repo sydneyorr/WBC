@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  def self.all_clicks
+    select('SUM(clicks) AS all_clicks')
+    .from('users')
+  end
 end
